@@ -1,23 +1,23 @@
-#! /usr/bin/env python
- 
 import os
 import sys
 import random
 import pygame
 import numpy as np
 
-# Nice class to hold a wall rect
+# from here the this class will hold a wall rect
 class Wall(object):
     
     def __init__(self, pos):
         walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
+        self.walls = None
+
  
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
  
-# Set up the display
+# here we set up the display
 screen = pygame.display.set_mode((400, 400))
  
 walls = [] # List to hold the walls
@@ -61,7 +61,7 @@ while running:
 
  
  
-    # Draw the scene
+    # Feom here we will draw the scene
     screen.fill((0, 0, 0))
     for wall in walls:
         pygame.draw.rect(screen, (255, 255, 255), wall.rect)
