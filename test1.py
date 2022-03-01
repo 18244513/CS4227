@@ -1,38 +1,40 @@
 import sys, pygame
 
-
-
-from PIL import Image
-
-def resize_image(input_image_path,
-                 output_image_path,
-                 size):
-    original_image = Image.open(input_image_path)
-    width, height = original_image.size
-
-    resized_image = original_image.resize(size)
-    width, height = resized_image.size
-    resized_image.save(output_image_path)
-
-if __name__ == '__main__':
-    resize_image(input_image_path='tank.jpg',
-                 output_image_path='tank2.png',
-                 size=(100, 100))
-
 pygame.init()
 
-window = pygame.display.set_mode((1920, 1080))
+window = pygame.display.set_mode((500, 500), pygame.RESIZABLE)
 
 pygame.display.set_caption('Tank Trouble')
 
-tank = pygame.image.load('tank2.png')
+tank = pygame.image.load('Images/tank.png')
 
-background = pygame.image.load("grass2.png")
+
+
+height = window.get_height()/10
+width = window.get_width()/10
+
+tank = pygame.transform.scale(tank, (width, height))
+
+
+
+background = pygame.image.load("Images/grass.png")
+
+background = pygame.transform.scale(background, (1920, 1080))
+
+tank_up = pygame.transform.rotate(tank, 0)
+
+tank_left = pygame.transform.rotate(tank, 90)
+
+tank_down = pygame.transform.rotate(tank, 180)
+
+tank_right = pygame.transform.rotate(tank, 270)
+
+
 
 x = 100
 y = 100
 
-velocity = 12
+velocity = 2
 
 run = True
 while run:
@@ -43,27 +45,37 @@ while run:
 
 	for event in pygame.event.get():
 
+		if event.type == pygame.VIDEORESIZE:
+			# There's some code to add back window content here.
+			surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+
 		if event.type == pygame.QUIT:
 			run = False
 			pygame.quit()
 			quit()
 
+		if pygame.key.get_pressed()[pygame.K_a]:
+			x -= velocity
+			y = y + 0
+			tank = tank_left
 
-		if event.type == pygame.KEYDOWN:
+		elif pygame.key.get_pressed()[pygame.K_d]:
+			x += velocity
+			y = y + 0
+			tank = tank_right
 
-			if event.key == ord('a'):
-				x -= velocity
+		elif pygame.key.get_pressed()[pygame.K_w]:
+			y -= velocity
+			x = x + 0
+			tank = tank_up
 
-			if event.key == ord('d'):
-				x += velocity
+		elif pygame.key.get_pressed()[pygame.K_s]:
+			y += velocity
+			x = x + 0
+			tank = tank_down
 
-			if event.key == ord('w'):
-				y -= velocity
-
-			if event.key == ord('s'):
-				y += velocity
-
-			if event.key == ord('q'):
-				quit()
+		if pygame.key.get_pressed()[pygame.K_q]:
+			quit()
 
 		pygame.display.update()
+
