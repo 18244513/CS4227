@@ -49,18 +49,19 @@ class Maze():
         i += 1
         if i == rows:
             break
+        
 
-        print(level)
-
-
-        x = y = 0
-        for row in level:
-            for col in row:
-                if col == 1:
-                    Wall((x, y))
-                x += 16
-            y += 16
-            x = 0
+    x = y = 0
+    for row in level:
+        for col in row:
+            if col == 1:
+                Wall((x, y))
+            x += 16
+        y += 16
+        x = 0
+        
+    print(level)
+    
 
 
 running = True
