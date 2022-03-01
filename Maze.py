@@ -27,7 +27,7 @@ class Maze():
     #Here the maze is created using a 2D array
     #This can later be modified to give a random 2D array with
     #random variables
-    level = np.full((11, 11), 0)  # random values
+    level = np.full((21, 21), 0)  # random values
 
     i = 0
     j = 0
@@ -49,6 +49,20 @@ class Maze():
         i += 1
         if i == rows:
             break
+
+
+
+    
+
+    for i in range(2, rows - 2):
+        print (i)
+        for j in range(2, cols - 2):
+            print(j)
+            node = random.randint(0, 1)
+            level[i][j] = node
+            j = j + 1
+        i = i + 1
+    print(level)
         
 
     x = y = 0
@@ -59,7 +73,7 @@ class Maze():
             x += 16
         y += 16
         x = 0
-        
+
     print(level)
     
 
