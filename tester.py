@@ -141,7 +141,7 @@ while running:
     screen.fill((0, 0, 0))
     for wall in walls:
         pygame.draw.rect(screen, (255, 255, 255), wall.rect)# Determine the wall
-        pygame.draw.rect(screen, (255, 200, 0), player.rect)
+        pygame.draw.rect(screen, (255, 0, 0), player.rect)
     pygame.display.flip()
  
 pygame.quit()

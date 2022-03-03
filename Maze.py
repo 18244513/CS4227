@@ -36,10 +36,6 @@ class Maze():
 
     cols = len(level[0])
 
-    
-
-    print(cols)
-
     while i < rows:
         level[i][0] = 1
         level[0][i] = 1
@@ -55,14 +51,11 @@ class Maze():
     
 
     for i in range(2, rows - 2):
-        print (i)
         for j in range(2, cols - 2):
-            print(j)
             node = random.randint(0, 1)
             level[i][j] = node
             j = j + 1
         i = i + 1
-    print(level)
         
 
     x = y = 0
@@ -86,6 +79,10 @@ while running:
             running = False
         if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
             running = False
+
+
+
+
 
  
  
