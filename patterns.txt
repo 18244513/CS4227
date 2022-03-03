@@ -1,0 +1,88 @@
+Usability
+•	Avoid using more steps in HIS applications.
+
+•	Minimise the choices available for users.
+
+•	The reminder feature should have three reporting options in an easy-to-use screen --- taken, not taken, or snooze regarding medication dosage.
+ 
+•	Avoid making many clicks for users.
+
+•	Allow a straight to log in, and no need to make an account or password needed.
+
+•	Avoid making HIS applications product is too compact.
+
+•	Make the text on a bright background, so the contrast will be clear for users and avoid dark coloured backgrounds.
+
+•	Make HIS applications pages attractive to users while they use them. 
+
+•	Make it easy to find help and support channels for users. 
+
+•	Avoid too much writing and descriptions of HIS applications. 
+
+•	Make HIS applications use simplistic language and support other languages besides English.
+
+•	Make the app’s name (Title) clear and reflect it’s content.
+
+•	Make the HIS applications work well on different operating systems. E.g., Android, iOS, and Windows. 
+
+•	Do not include words therapy and disability in the name of the HIS applications.
+
+Accessibility
+•	Use clear and straightforward language.
+
+•	Make the word pronunciation clear and avoid using complicated terminology.
+
+•	Make simple sentences and bullets.
+
+•	Let the users notified when the device work or the tasks starts.
+
+•	Make the sound loud and hearable for users.
+
+•	Make the media sources such as video and pictures available for users. 
+
+•	Make it easier for users to operate functionality through various inputs beyond the keyboard.
+
+•	Make the HIS applications work in all operating system such as iOS, Android, and others. 
+
+•	Make the loading pages in HIS applications very fast.
+
+•	Allow navigational gestures to help users to move through a product quickly.
+
+•	Incorporate a feature of a splash screen by using an image during the loading process.
+
+•	Avoid crashes, freezes, or just won’t run during the execution of functionality of HIS applications.
+
+•	Never convey information by colour alone. Ensure sufficient contrast so that it is easier to distinguish items, both visual and auditory.
+
+•	Enable autocomplete widgets to help users for accessibilities because they can make it easier to enter text by providing suggestions based on the fonts initially typed. 
+
+Content
+•	Incorporate a feature that helps persons with IDD to keep track of and maintain their health. 
+
+•	Incorporate a feature that helps users with medication management.
+
+•	User’s health information should be sent to the appropriate person: ideally, the decision-maker for IDD persons.
+
+•	Incorporate a feature that increases the level of awareness about user’s health behaviours. 
+
+•	Provide a short video addressing many topics of health promotion. 
+
+•	Provide accurate information and avoid ambiguity or scary things to users.
+
+•	Make it easy to get human help and give feedback.
+
+•	Make the results of any search that the users do are video or pictures first.
+
+•	Keep the personal information of persons with IDD safe and assurance of privacy needed.
+
+Gamification
+•	Avoid the use of small objects in the game.
+•	Allow users to control the speed at which they move through the game. 
+•	The game should offer a varying range of activities to minimize fatigue or boredom. 
+•	Include no objects that are believed to cause seizures, such as flashing elements or elements with specific spatial frequencies. 
+•	Enable a fixed game display screen to prevent users from resizing it unintentionally.
+•	Allow users to use their picture in the virtual avatar/character.
+•	Make the time display shows clearly on screen for the users.
+•	Provide a value gift for users that should depend on the user’s performance (based on the game’s time).
+•	The game should let the user commit errors.
+•	Provide a reward playtime at the end of the game. 
