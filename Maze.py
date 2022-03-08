@@ -74,8 +74,8 @@ class Maze():
 
 
     def isPath(level):
-        rows = 10
-        cols = 15
+        rows = len(level)
+        cols = len(level[0])
         for i in range(1, rows):
             if (level[i][0] != 1):
                 level[i][0] = level[i-1][0]
