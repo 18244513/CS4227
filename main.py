@@ -1,27 +1,6 @@
-"""
-Sample Python/Pygame Programs
-Simpson College Computer Science
-http://programarcadegames.com/
-http://simpson.edu/computer-science/
- 
-From:
-http://programarcadegames.com/python_examples/f.php?file=move_with_walls_example
- 
-Explanation video: http://youtu.be/8IRyt7ft7zg
- 
-Part of a series:
-http://programarcadegames.com/python_examples/f.php?file=move_with_walls_example.py
-http://programarcadegames.com/python_examples/f.php?file=maze_runner.py
-http://programarcadegames.com/python_examples/f.php?file=platform_jumper.py
-http://programarcadegames.com/python_examples/f.php?file=platform_scroller.py
-http://programarcadegames.com/python_examples/f.php?file=platform_moving.py
-http://programarcadegames.com/python_examples/sprite_sheets/
-"""
- 
 import os
+from pdb import main
 import pygame
- 
-# -- Global constants
  
 # Colors
 BLACK = (0, 0, 0)
@@ -35,89 +14,79 @@ SCREEN_HEIGHT = 600
  
 class Player(pygame.sprite.Sprite):
  
-    # Constructor function
     def __init__(self, x, y):
-        # Call the parent's constructor
         super().__init__()
  
-        # Set height, width
         self.image = pygame.image.load(os.path.join('Images/tank.png')).convert()
  
-        # Make our top-left corner the passed-in location.
         self.rect = self.image.get_rect()
         self.rect.y = y
         self.rect.x = x
  
-        # Set speed vector
         self.change_x = 0
         self.change_y = 0
         self.walls = None
  
     def changespeed(self, x, y):
-        """ Change the speed of the player. """
         self.change_x += x
         self.change_y += y
  
     def update(self):
-        """ Update the player position. """
-        # Move left/right
+        
         self.rect.x += self.change_x
  
-        # Did this update cause us to hit a wall?
+ 
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
-            # If we are moving right, set our right side to the left side of
-            # the item we hit
+            
             if self.change_x > 0:
                 self.rect.right = block.rect.left
             else:
-                # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
  
-        # Move up/down
         self.rect.y += self.change_y
  
-        # Check and see if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
  
-            # Reset our position based on the top/bottom of the object.
             if self.change_y > 0:
                 self.rect.bottom = block.rect.top
             else:
                 self.rect.top = block.rect.bottom
  
- 
+'''
+Wall Class
+'''
 class Wall(pygame.sprite.Sprite):
-    """ Wall the player can run into. """
     def __init__(self, x, y, width, height):
-        """ Constructor for the wall that the player can run into. """
-        # Call the parent's constructor
+        
         super().__init__()
  
-        # Make a blue wall, of the size specified in the parameters
+ 
         self.image = pygame.Surface([width, height])
         self.image.fill(BLUE)
  
-        # Make our top-left corner the passed-in location.
+ 
         self.rect = self.image.get_rect()
         self.rect.y = y
         self.rect.x = x
  
  
-# Call this function so the Pygame library can initialize itself
+ 
 pygame.init()
  
-# Create an 800x600 sized screen
+ 
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
  
-# Set the title of the window
-pygame.display.set_caption('Test')
  
-# List to hold all the sprites
+pygame.display.set_caption('Tank Trouble')
+ 
+ 
 all_sprite_list = pygame.sprite.Group()
  
-# Make the walls. (x_pos, y_pos, width, height)
+'''
+Walls
+'''
 wall_list = pygame.sprite.Group()
  
 wall = Wall(0, 0, 10, 600)
@@ -132,7 +101,7 @@ wall = Wall(10, 200, 100, 10)
 wall_list.add(wall)
 all_sprite_list.add(wall)
  
-# Create the player paddle object
+ 
 player = Player(50, 50)
 player.walls = wall_list
  
@@ -140,37 +109,52 @@ all_sprite_list.add(player)
  
 clock = pygame.time.Clock()
  
-done = False
+'''
+Rotate tank 
+'''
+tank_up = pygame.transform.rotate(player.image, 0)
+tank_left = pygame.transform.rotate(player.image, 90)
+tank_down = pygame.transform.rotate(player.image, 180)
+tank_right = pygame.transform.rotate(player.image, 270)
  
-while not done:
+while main:
  
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = True
+            pygame.quit()
+            quit()
  
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 player.changespeed(-3, 0)
-            elif event.key == pygame.K_RIGHT:
+                player.image = tank_left
+            elif event.key == pygame.K_d:
                 player.changespeed(3, 0)
-            elif event.key == pygame.K_UP:
+                player.image = tank_right
+            elif event.key == pygame.K_w:
                 player.changespeed(0, -3)
-            elif event.key == pygame.K_DOWN:
+                player.image = tank_up
+            elif event.key == pygame.K_s:
                 player.changespeed(0, 3)
+                player.image = tank_down
  
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 player.changespeed(3, 0)
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_d:
                 player.changespeed(-3, 0)
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_w:
                 player.changespeed(0, 3)
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_s:
                 player.changespeed(0, -3)
+                
+        if pygame.key.get_pressed()[pygame.K_q]:
+            quit()
  
     all_sprite_list.update()
- 
-    screen.fill(BLACK)
+    
+    background = pygame.image.load("Images/grass.png")
+    screen.blit(background, (0, 0))
  
     all_sprite_list.draw(screen)
  

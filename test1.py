@@ -8,22 +8,7 @@ pygame.display.set_caption('Tank Trouble')
 
 tank = pygame.image.load('Images/tank.png')
 
-from PIL import Image
 
-def resize_image(input_image_path,
-                 output_image_path,
-                 size):
-    original_image = Image.open(input_image_path)
-    width, height = original_image.size
-
-    resized_image = original_image.resize(size)
-    width, height = resized_image.size
-    resized_image.save(output_image_path)
-
-if name == 'main':
-    resize_image(input_image_path='grass.png',
-                 output_image_path='grass2.png',
-                 size=(960, 720))
 
 height = window.get_height()/10
 width = window.get_width()/10

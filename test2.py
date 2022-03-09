@@ -20,10 +20,8 @@ WHITE = (254, 254, 254)
 ALPHA = (0, 255, 0)
 
 '''
-Objects
+Player Sprite
 '''
-
-
 class Player(pygame.sprite.Sprite):
     """
     Spawn a player
@@ -42,12 +40,31 @@ class Player(pygame.sprite.Sprite):
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
+            
+'''
+Wall Colisions
+'''
+class Wall(pygame.sprite.Sprite):
+    """ Wall the player can run into. """
+    def __init__(self, x, y, width, height):
+        """ Constructor for the wall that the player can run into. """
+        # Call the parent's constructor
+        super().__init__()
+ 
+        # Make a blue wall, of the size specified in the parameters
+        self.image = pygame.Surface([width, height])
+        self.image.fill(BLUE)
+ 
+        # Make our top-left corner the passed-in location.
+        self.rect = self.image.get_rect()
+        self.rect.y = y
+        self.rect.x = x
 
 '''
 Setup
 '''
 
-backdrop = pygame.image.load(os.path.join('Images/grass.png'))
+# backdrop = pygame.image.load(os.path.join('Images/grass.png'))
 clock = pygame.time.Clock()
 pygame.init()
 backdropbox = world.get_rect()
@@ -103,7 +120,7 @@ while main:
         if pygame.key.get_pressed()[pygame.K_q]:
             quit()
 
-    world.blit(backdrop, backdropbox)
+    # world.blit(backdrop, backdropbox)
     player.update()
     player_list.draw(world)
     pygame.display.flip()
