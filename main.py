@@ -1,5 +1,6 @@
 import os
 from pdb import main
+import sys
 import pygame
  
 # Colors
@@ -11,7 +12,10 @@ BLUE = (50, 50, 255)
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
  
- 
+file = open("Coordinates.txt","r+")
+file.truncate(0)
+file.close()
+
 class Player(pygame.sprite.Sprite):
  
     def __init__(self, x, y):
@@ -26,15 +30,26 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
         self.walls = None
+        
  
     def changespeed(self, x, y):
         self.change_x += x
         self.change_y += y
- 
+        
+    def location(self):
+        original_stdout = sys.stdout
+        with open('Coordinates.txt', 'a') as f:
+            sys.stdout = f
+            x_coords = 'x = ' + str(self.rect.left)
+            y_coords = 'y = ' + str(self.rect.top)
+            print(x_coords)
+            print(y_coords)
+            
+            sys.stdout = original_stdout
+        
     def update(self):
         
         self.rect.x += self.change_x
- 
  
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
@@ -118,35 +133,47 @@ tank_down = pygame.transform.rotate(player.image, 180)
 tank_right = pygame.transform.rotate(player.image, 270)
  
 while main:
- 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
- 
+
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
                 player.changespeed(-3, 0)
                 player.image = tank_left
+                
             elif event.key == pygame.K_d:
                 player.changespeed(3, 0)
                 player.image = tank_right
+                
             elif event.key == pygame.K_w:
                 player.changespeed(0, -3)
                 player.image = tank_up
+                
             elif event.key == pygame.K_s:
                 player.changespeed(0, 3)
                 player.image = tank_down
- 
+                
+
+
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 player.changespeed(3, 0)
+                player.location()
+                
             elif event.key == pygame.K_d:
                 player.changespeed(-3, 0)
+                player.location()
+                
             elif event.key == pygame.K_w:
                 player.changespeed(0, 3)
+                player.location()
+                
             elif event.key == pygame.K_s:
                 player.changespeed(0, -3)
+                player.location()
                 
         if pygame.key.get_pressed()[pygame.K_q]:
             quit()
@@ -161,5 +188,6 @@ while main:
     pygame.display.flip()
  
     clock.tick(60)
- 
+    
+
 pygame.quit()
