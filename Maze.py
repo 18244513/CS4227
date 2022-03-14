@@ -179,7 +179,7 @@ class Maze():
         level[rows - 1][j] = 1
         j += 1
 
-    
+    #here I create empty space beside the barriers of the maze
     for i in range(2, rows - 2):
         for j in range(2, cols - 2):
             node = random.randint(0, 1)
@@ -189,12 +189,14 @@ class Maze():
         
 
     for n in range(1, 2):
+    #Here I find any spaces that are reachable and unreachable
         start = Point(2,2)
         for i in range(2, rows-1):
             for j in range(2, cols - 1):
                 if(level[i][j] == 1):
                     j = j + 1
                 else:
+                    #for those spaces I run the Path def to create space next to each unreachable path 
                     end = Point(i,j)
                     dist = Path(level,start,end)
                     number = random.randint(0, 1)
