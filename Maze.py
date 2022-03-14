@@ -36,9 +36,6 @@ class Maze():
 
     cols = len(level[0])
 
-    
-
-    print(cols)
 
     while i < rows:
         level[i][0] = 1
