@@ -168,13 +168,12 @@ class Maze():
     i = 0
     j = 0
 
-    while i < rows:
+    for i in range(1, rows):
         level[i][0] = 1
         level[i][cols - 1] = 1
-
         i += 1
 
-    while j < cols:
+    for i in range(1, cols):
         level[0][j] = 1
         level[rows - 1][j] = 1
         j += 1
