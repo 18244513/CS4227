@@ -13,46 +13,35 @@ class Director:
     def getMaze(self):
         game = Game()
 
-        maze = self.__builder.getMazeWalls()
-        game.setMazeWalls(maze)
+        maze = self.__builder.getMatrix()
+        game.setMatrix(maze)
 
         wall = self.__builder.getWalls()
         game.setWalls(wall)
 
-        display = self.__builder.getDisplay()
-        game.setDisplay(display)
-
+        player = self.__builder.getPlayer()
+        game.setPlayer(player)
 
         return game
-
-        
 
 class Game:
     def __init__(self):
         self.__maze = None
 
-
-    def setMazeWalls(self, maze):
+    def setMatrix(self, maze):
         self.__maze = maze
 
     def setWalls(self, wall):
         self.__wall = wall
 
-    def setDisplay(self, display):
-        self.__display = display
-
-    def specification(self):
-        print(self.__maze)
-        print(self.__display)
-
-
+    def setPlayer(self, player):
+        self.__player = player
 
 
 class Builder:
-    def getMazeWalls(self): pass
+    def getMatrix(self): pass
     def getWall(self): pass
-    def getPath(self): pass
-    def getDisplay(self): pass
+    def getPlayer(self): pass
 
 
 
@@ -65,7 +54,7 @@ class RandMaze(Builder):
         self.screen = pygame.display.set_mode((960, 720))
         self.running = True
 
-    def getMazeWalls(self):
+    def getMatrix(self):
 
         maze = self.maze
 
@@ -110,7 +99,7 @@ class RandMaze(Builder):
 
 
 
-    def getDisplay(self):
+    def getPlayer(self):
 
         player = Player()
         
@@ -154,7 +143,7 @@ class NonRandMaze(Builder):
         self.rect = pygame.Rect(32, 32, 16, 16)
         self.walls = np.array
 
-    def getMazeWalls(self):
+    def getMatrix(self):
 
         maze = self.maze
 
@@ -202,7 +191,7 @@ class NonRandMaze(Builder):
         
 
 
-    def getDisplay(self):
+    def getPlayer(self):
 
         player = Player()
         
@@ -235,14 +224,6 @@ class NonRandMaze(Builder):
                 #creates a test player that can interact with the wall
                 pygame.draw.rect(screen, (255, 0, 0), player.rect)
             pygame.display.flip()
-    
-
-
-class Matrix:
-   matrix = []
-
-class Display:
-    screen = pygame.display.set_mode((960, 720))
 
 class Walls(object):
     
@@ -284,15 +265,9 @@ class Player(object):
                 if dy < 0: # Moving up; Hit the bottom side of the wall
                     self.rect.top = wall.rect.bottom
 
-class Path():
-
-    def __init__(self):
-        cla = RandMaze()
-        self.matrix = cla.getMazeWalls()
-
 
 def main():
-    rand = False
+    rand = True
 
     if rand == True:
         Maze = RandMaze()
@@ -300,10 +275,8 @@ def main():
         Maze = NonRandMaze()
 
     director = Director()
-
     director.setBuilder(Maze)
     maze = director.getMaze()
-    maze.specification()
     print(maze)
 
 
