@@ -13,8 +13,8 @@ class Director:
     def getMaze(self):
         game = Game()
 
-        maze = self.__builder.getMatrix()
-        game.setMatrix(maze)
+        matrix = self.__builder.getMatrix()
+        game.setMatrix(matrix)
 
         wall = self.__builder.getWalls()
         game.setWalls(wall)
@@ -26,10 +26,10 @@ class Director:
 
 class Game:
     def __init__(self):
-        self.__maze = None
+        self.__matrix = None
 
-    def setMatrix(self, maze):
-        self.__maze = maze
+    def setMatrix(self, matrix):
+        self.__matrix = matrix
 
     def setWalls(self, wall):
         self.__wall = wall
@@ -49,45 +49,41 @@ class Builder:
 class RandMaze(Builder):
 
     def __init__(self):
-        self.maze = np.full((45, 60), 0)
+        self.matrix = np.full((45, 60), 0)
         self.rect = pygame.Rect(32, 32, 16, 16)
         self.screen = pygame.display.set_mode((960, 720))
         self.running = True
 
     def getMatrix(self):
 
-        maze = self.maze
+        matrix = self.matrix
 
-        rows = len(maze)             # Gets rows in matrix
-        cols = len(maze[0])          # Gets cols in matrix
-
-    
-        i = 0
-        j = 0
+        rows = len(matrix)             # Gets rows in matrix
+        cols = len(matrix[0])          # Gets cols in matrix
 
         for i in range(0, rows):
-            maze[i][0] = 1
-            maze[i][cols - 1] = 1
+            matrix[i][0] = 1
+            matrix[i][cols - 1] = 1
             i += 1
 
-        for i in range(0, cols):
-            maze[0][j] = 1
-            maze[rows - 1][j] = 1
+        for j in range(0, cols):
+            matrix[0][j] = 1
+            matrix[rows - 1][j] = 1
             j += 1
 
         for i in range(2, rows - 2):
             for j in range(2, cols - 2):
                 node = random.randint(0, 1)
-                maze[i][j] = node
+                matrix[i][j] = node
                 j = j + 1
             i = i + 1        
 
 
     def getWalls(self):
 
-        maze = self.maze
+        matrix = self.matrix
         x = y = 0
-        for row in maze:
+        for row in matrix:
             for col in row:
                 if col == 1:
                     Walls((x, y))
@@ -95,7 +91,7 @@ class RandMaze(Builder):
             y += 16
             x = 0
 
-        return maze
+        return matrix
 
 
 
@@ -139,27 +135,25 @@ class RandMaze(Builder):
 class NonRandMaze(Builder):
 
     def __init__(self):
-        self.maze = np.full((43, 60), 0)
+        self.matrix = np.full((43, 60), 0)
         self.rect = pygame.Rect(32, 32, 16, 16)
         self.walls = np.array
 
     def getMatrix(self):
 
-        maze = self.maze
+        matrix = self.matrix
 
-        rows = len(maze)             # Gets rows in matrix
-        cols = len(maze[0])          # Gets cols in matrix
-
-    
+        rows = len(matrix)             # Gets rows in matrix
+        cols = len(matrix[0])          # Gets cols in matrix
 
         for i in range(0, rows):
-            maze[i][0] = 1
-            maze[i][cols - 1] = 1
+            matrix[i][0] = 1
+            matrix[i][cols - 1] = 1
             i += 1
 
         for j in range(0, cols):
-            maze[0][j] = 1
-            maze[rows - 1][j] = 1
+            matrix[0][j] = 1
+            matrix[rows - 1][j] = 1
             j += 1
 
 
@@ -167,18 +161,18 @@ class NonRandMaze(Builder):
         for i in range(3, rows - 2, 4):
             for j in range(3, cols - 2, 4):
                 node = 1
-                maze[i][j] = node
-                maze[i - 1][j] = node
-                maze[i + 1][j] = node
-                maze[i][j - 1] = node
-                maze[i][j + 1] = node
+                matrix[i][j] = node
+                matrix[i - 1][j] = node
+                matrix[i + 1][j] = node
+                matrix[i][j - 1] = node
+                matrix[i][j + 1] = node
 
 
     def getWalls(self):
 
-        maze = self.maze
+        matrix = self.matrix
         x = y = 0
-        for row in maze:
+        for row in matrix:
             for col in row:
                 if col == 1:
                     Walls((x, y))
@@ -186,7 +180,7 @@ class NonRandMaze(Builder):
             y += 16
             x = 0
 
-        return maze
+        return matrix
 
         
 
@@ -267,9 +261,9 @@ class Player(object):
 
 
 def main():
-    rand = True
+    randMaze = False
 
-    if rand == True:
+    if randMaze == True:
         Maze = RandMaze()
     else:
         Maze = NonRandMaze()
