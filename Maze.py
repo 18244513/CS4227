@@ -222,10 +222,10 @@ class NonRandMaze(Builder):
                 player.move(0, 2)
                     
             # Feom here we will draw the scene
-            screen.fill((0, 0, 0))
+            screen.fill((0, 0, 255))
             for wall in walls:
                 # Determine the wall what the wall looks like
-                pygame.draw.rect(screen, (255, 255, 255), wall.rect)
+                pygame.draw.rect(screen, (0, 255, 0), wall.rect)
                 #creates a test player that can interact with the wall
                 pygame.draw.rect(screen, (255, 0, 0), player.rect)
             pygame.display.flip()
@@ -281,7 +281,7 @@ class Player(object):
 
 
 def main():
-    randMaze = True
+    randMaze = False
 
     if randMaze == True:
         Maze = RandMaze()
