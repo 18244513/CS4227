@@ -40,7 +40,7 @@ class Game:
         self.__player = player
 
 
-#here we have the seperate parts of the Game
+#here we have the seperate parts of the Game that will be used by the Concrete Builder
 class Builder:
     def getMatrix(self):
         pass
@@ -69,16 +69,19 @@ class RandMaze(Builder):
         rows = len(matrix)             # Gets rows in matrix
         cols = len(matrix[0])          # Gets cols in matrix
 
+        #Sets the outsides of the matrix to 1
         for i in range(0, rows):
             matrix[i][0] = 1
             matrix[i][cols - 1] = 1
             i += 1
 
+        #Sets the 1 from the outsides of the matrix to 0
         for j in range(0, cols):
             matrix[0][j] = 1
             matrix[rows - 1][j] = 1
             j += 1
 
+        #Randomize the center of the maze from 0's and 1's
         for i in range(2, rows - 2):
             for j in range(2, cols - 2):
                 node = random.randint(0, 1)
@@ -89,6 +92,7 @@ class RandMaze(Builder):
 
     def getWalls(self):
 
+        #Places walls where 1 is in the matrix
         matrix = self.matrix
         x = y = 0
         for row in matrix:
@@ -110,6 +114,7 @@ class RandMaze(Builder):
         screen = self.screen
         self.running = True
 
+        #While the game runs the player can move with the arrow keys and closed by the ESC button
         while self.running:
     
             for e in pygame.event.get():
@@ -168,7 +173,7 @@ class NonRandMaze(Builder):
             j += 1
 
 
-
+        #Rather than 
         for i in range(3, rows - 2, 4):
             for j in range(3, cols - 2, 4):
                 node = 1
@@ -281,7 +286,7 @@ class Player(object):
 
 
 def main():
-    randMaze = False
+    randMaze = True
 
     if randMaze == True:
         Maze = RandMaze()
