@@ -4,6 +4,7 @@ import pygame
 
 walls = []
 
+#Here the class Director controls the construction process of the Game
 class Director:
     __builder = None
 
@@ -24,6 +25,7 @@ class Director:
 
         return game
 
+#here is the final product that will be used by the director and use the parts in Builder the 
 class Game:
     def __init__(self):
         self.__matrix = None
@@ -38,14 +40,20 @@ class Game:
         self.__player = player
 
 
+#here we have the seperate parts of the Game
 class Builder:
-    def getMatrix(self): pass
-    def getWall(self): pass
-    def getPlayer(self): pass
+    def getMatrix(self):
+        pass
+
+    def getWall(self): 
+        pass
+
+    def getPlayer(self): 
+        pass
 
 
 
-
+#here is the concrete builder for creating a maze that is random
 class RandMaze(Builder):
 
     def __init__(self):
@@ -118,8 +126,6 @@ class RandMaze(Builder):
             if key[pygame.K_DOWN]:
                 player.move(0, 2)
                     
-
-
  
             # Feom here we will draw the scene
             screen.fill((0, 0, 0))
@@ -132,6 +138,11 @@ class RandMaze(Builder):
 
 
 
+
+
+
+
+#here is the concrete builder for creating a maze that has + instead of being random
 class NonRandMaze(Builder):
 
     def __init__(self):
@@ -219,6 +230,11 @@ class NonRandMaze(Builder):
                 pygame.draw.rect(screen, (255, 0, 0), player.rect)
             pygame.display.flip()
 
+
+
+
+
+
 class Walls(object):
     
     def __init__(self, pos):
@@ -260,8 +276,12 @@ class Player(object):
                     self.rect.top = wall.rect.bottom
 
 
+
+
+
+
 def main():
-    randMaze = False
+    randMaze = True
 
     if randMaze == True:
         Maze = RandMaze()
