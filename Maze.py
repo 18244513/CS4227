@@ -1,3 +1,6 @@
+#Shane Donaghy 18252478
+#Here I have created a maze using the Builder Design Pattern in Python
+
 import numpy as np
 import random
 import pygame
