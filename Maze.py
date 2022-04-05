@@ -296,7 +296,6 @@ def main():
     director = Director()
     director.setBuilder(Maze)
     maze = director.getMaze()
-    print(maze)
 
 
 main()
