@@ -3,10 +3,12 @@
 import os
 import pygame
 
-velocity = 12
+
 
 class Player(pygame.sprite.Sprite):
-     
+    
+    velocity = 12
+    
     def __init__(self, x, y):
         super().__init__()
  
@@ -51,22 +53,18 @@ class Player(pygame.sprite.Sprite):
     Cathal
     '''
     
-    @staticmethod
     def run_move_up_command(self):
-        self.rect.y += self.velocity
+        self.rect.y -= self.velocity
         self.rect.y = self.rect.y + 0
         
-    @staticmethod
     def run_move_down_command(self):
-        self.rect.y -= self.velocity
+        self.rect.y += self.velocity
         self.rect.y = self.rect.y - 0
         
-    @staticmethod
     def run_move_right_command(self):
         self.rect.x += self.velocity
         self.rect.x = self.rect.x + 0
         
-    @staticmethod
     def run_move_left_command(self):
         self.rect.x -= self.velocity
         self.rect.x = self.rect.x - 0
