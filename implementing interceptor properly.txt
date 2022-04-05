@@ -1,0 +1,22 @@
+(a)interface called interceptor logger 
+has method called log
+
+
+(b)concrete interceptor logger
+b implements a
+
+(c)context object (name of class)
+get coords
+
+(d)Dispatcher (name of class)
+register, unregister, notify and dispatch (all differenet methods)(in sub
+
+
+
+
+create in main instance of abcd
+main method registers class b with d
+
+call dispatch on d 
+d calls log in b and it passes a reference to context object as an argument
+b calls get coords on c
